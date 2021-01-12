@@ -4,11 +4,11 @@ Simple cache abstraction for Golang
 Supported cache
   - In Memory
   - Redis
+  - LRU
 
 ## Quick Start
 
 Installation
-
     $ go get github.com/sahalazain/simplecache
 
 
@@ -39,11 +39,13 @@ import (
 	cache "github.com/sahalazain/simplecache"
 	_ "github.com/sahalazain/simplecache/mem"
 	_ "github.com/sahalazain/simplecache/redis"
+	_ "github.com/sahalazain/simplecache/lru"
 )
 
 func main() {
 	// Use in-memory store
 	memcache, _ := cache.New("mem://")
 	rediscache, _ := cache.New("redis://localhost:6379/prefix")
+	lru, _ := cache.New("lru://local/1024")
 }
 ```
