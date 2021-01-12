@@ -8,6 +8,8 @@ import (
 
 	"github.com/alicebob/miniredis/v2"
 	cache "github.com/sahalazain/simplecache"
+	"github.com/sahalazain/simplecache/lru"
+	_ "github.com/sahalazain/simplecache/lru"
 	"github.com/sahalazain/simplecache/mem"
 	_ "github.com/sahalazain/simplecache/mem"
 	"github.com/sahalazain/simplecache/redis"
@@ -51,6 +53,21 @@ func TestRedisCache(t *testing.T) {
 
 	testCache(t, c, func(t time.Duration) {
 		s.FastForward(t)
+	})
+}
+
+func TestLRUCache(t *testing.T) {
+	url := "lru://"
+	c, err := cache.New(url)
+	assert.Nil(t, err)
+	assert.NotNil(t, c)
+
+	mc, ok := c.(*lru.Cache)
+	assert.True(t, ok)
+	assert.NotNil(t, mc)
+
+	testCache(t, c, func(t time.Duration) {
+		time.Sleep(t)
 	})
 }
 
