@@ -45,7 +45,7 @@ import (
 func main() {
 	// Use in-memory store
 	memcache, _ := cache.New("mem://")
-	rediscache, _ := cache.New("redis://localhost:6379/prefix")
+	rediscache, _ := cache.New("redis://<user>:<pass>@localhost:6379/prefix")
 	lru, _ := cache.New("lru://local/1024")
 }
 ```

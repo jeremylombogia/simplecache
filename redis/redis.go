@@ -26,10 +26,11 @@ func init() {
 
 //NewCache create new redis cache
 func NewCache(url *url.URL) (cache.Cache, error) {
+	p, _ := url.User.Password()
 	rClient := redis.NewClient(&redis.Options{
 		Addr:     url.Host,
-		Password: "", // no password set
-		DB:       0,  // use default DB
+		Password: p,
+		DB:       0, // use default DB
 	})
 	cache := &Cache{
 		client: rClient,
